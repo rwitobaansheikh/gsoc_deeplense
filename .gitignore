@@ -11,6 +11,3 @@ test7/dataset/
 # Trained model outputs and weights
 test1/model/
 test7/model/
-
-# Model weight files in results directories (large binaries)
-*.pth
