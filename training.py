@@ -118,117 +118,16 @@ def score(model, data_loader, loss_fn, device="cpu"):
     average_loss = total_loss / n_observations
     accuracy = total_correct / n_observations
     
-    # Calculate Macro ROC-AUC (One-vs-Rest)
-    # This handles the 3 classes by averaging the AUC of each
-    auc_score = roc_auc_score(all_targets, all_probs, multi_class='ovr', average='macro')
+    # Calculate ROC-AUC
+    n_classes = all_probs.shape[1]
+    if n_classes == 2:
+        # Binary: pass probability of the positive class
+        auc_score = roc_auc_score(all_targets, all_probs[:, 1])
+    else:
+        # Multiclass: One-vs-Rest macro average
+        auc_score = roc_auc_score(all_targets, all_probs, multi_class='ovr', average='macro')
     
     return average_loss, accuracy, auc_score
-
-
-# def train(
-#     model,
-#     optimizer,
-#     loss_fn,
-#     train_loader,
-#     val_loader,
-#     epochs=100,
-#     device="cpu",
-#     use_train_accuracy=True,
-#     max_grad_norm=1.0,
-#     early_stopping_patience=15,
-#     early_stopping_min_delta=0.001,
-#     use_lr_scheduler=True,
-# ):
-#     """
-#     Train the model with early stopping and learning rate scheduling
-    
-#     Args:
-#         model: Neural network model
-#         optimizer: Optimizer
-#         loss_fn: Loss function
-#         train_loader: Training data loader
-#         val_loader: Validation data loader
-#         epochs: Maximum number of epochs to train
-#         device: Device to train on ('cpu' or 'cuda')
-#         use_train_accuracy: Whether to compute training accuracy (slower but informative)
-#         max_grad_norm: Max gradient norm for clipping
-#         early_stopping_patience: Epochs to wait before early stopping
-#         early_stopping_min_delta: Minimum improvement threshold
-#         use_lr_scheduler: Whether to use learning rate scheduler
-#     """
-    
-#     # Initialize early stopping
-#     early_stopping = EarlyStopping(
-#         patience=early_stopping_patience,
-#         min_delta=early_stopping_min_delta,
-#         mode='min',
-#         restore_best_weights=True
-#     )
-    
-#     # Initialize learning rate scheduler (reduces LR when validation loss plateaus)
-#     if use_lr_scheduler:
-#         scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
-#             optimizer,
-#             mode='min',
-#             factor=0.5,
-#             patience=5,
-#             verbose=True,
-#             min_lr=1e-6
-#         )
-    
-#     # Track the model progress over epochs
-#     train_losses = []
-#     train_accuracies = []
-#     train_aucs = []
-#     val_losses = []
-#     val_accuracies = []
-#     val_aucs = []
-
-#     for epoch in range(1, epochs + 1):
-#         # Train one epoch
-#         training_loss = train_epoch(model, optimizer, loss_fn, train_loader, device, max_grad_norm=max_grad_norm)
-
-#         # Evaluate training results
-#         if use_train_accuracy:
-#             train_loss, train_accuracy, train_auc = score(model, train_loader, loss_fn, device)
-#         else:
-#             train_loss = training_loss
-#             train_accuracy = 0
-#             train_auc = 0
-#         train_losses.append(train_loss)
-#         train_accuracies.append(train_accuracy)
-#         train_aucs.append(train_auc)
-
-#         # Test on validation set
-#         validation_loss, validation_accuracy, validation_auc = score(model, val_loader, loss_fn, device)
-#         val_losses.append(validation_loss)
-#         val_accuracies.append(validation_accuracy)
-#         val_aucs.append(validation_auc)
-
-#         print(f"Epoch: {epoch}/{epochs}")
-#         print(f"    Training loss: {train_loss:.4f}")
-#         if use_train_accuracy:
-#             print(f"    Training accuracy: {train_accuracy:.4f}")
-#         print(f"    Training AUC: {train_auc:.4f}")
-#         print(f"    Validation loss: {validation_loss:.4f}")
-#         print(f"    Validation accuracy: {validation_accuracy:.4f}")
-#         print(f"    Validation AUC: {validation_auc:.4f}")
-        
-#         # Update learning rate based on validation loss
-#         if use_lr_scheduler:
-#             scheduler.step(validation_loss)
-        
-#         # Check early stopping condition
-#         should_stop = early_stopping(validation_loss, model, epoch=epoch-1)
-#         if should_stop:
-#             print(f"\n🛑 Early stopping triggered at epoch {epoch}")
-#             print(f"   Best validation loss: {early_stopping.best_value:.4f} (epoch {early_stopping.best_epoch + 1})")
-#             # Restore best model
-#             early_stopping.restore_best_model(model)
-#             break
-
-#     print(f"\n✅ Training completed in {epoch} epochs")
-#     return train_losses, val_losses, train_accuracies, val_accuracies, train_aucs, val_aucs
 
 def train(
     model,
