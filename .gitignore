@@ -13,3 +13,6 @@ test5/dataset/
 test1/model/
 test7/model/
 test5/model/
+
+#Trained model weights
+*.pth
