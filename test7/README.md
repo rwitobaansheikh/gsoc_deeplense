@@ -132,6 +132,22 @@ Up to 150 epochs; early stopping triggered at epoch **138**.
 
 **Learned Einstein radius** after training: **θ_E ≈ 0.2774** (normalised $[-1,1]$ units)
 
+### Image Classes
+
+![Image Classes](DeepLense_PINN_Results/image_classes_t7.png)
+
+### Training Curves
+
+![Training Curves](DeepLense_PINN_Results/training_curves_pinn_t7.png)
+
+### ROC Curves
+
+![ROC Curves](DeepLense_PINN_Results/roc_curve_t7.png)
+
+### Confusion Matrix
+
+![Confusion Matrix](DeepLense_PINN_Results/cm_t7.png)
+
 The model converged smoothly with no significant overfitting gap between training and validation AUC, indicating that the physics layer acts as an effective regulariser on top of the standard dropout and weight-decay regularisation.
 
 ---

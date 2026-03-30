@@ -16,3 +16,7 @@ test5/model/
 
 #Trained model weights
 *.pth
+
+*.tex
+images
+.sixth

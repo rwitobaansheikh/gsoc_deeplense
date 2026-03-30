@@ -15,6 +15,8 @@ A **ResNet50** pretrained on ImageNet is fine-tuned for lensing classification. 
 | Accuracy | 89.27% |
 | Macro AUC | 0.9783 |
 
+![Task 1 ROC Curves](test1/DeepLense_Gravitational_Lensing_Results/roc_curves_t1.png)
+
 → [Full details](test1/README.md) · [Pretrained weights (Google Drive)](https://drive.google.com/file/d/1DmlbkZsKYoJcdq3XFf7OrcbB9larAazF/view?usp=drive_link)
 
 ---
@@ -29,6 +31,8 @@ A **PINN** that embeds the gravitational lensing equation directly into the forw
 | Macro AUC | 0.9881 | +0.0098 |
 | Sphere recall | 83.32% | +6.28 pp |
 
+![Task 7 ROC Curves](test7/DeepLense_PINN_Results/roc_curve_t7.png)
+
 → [Full details](test7/README.md) · [Pretrained weights (Google Drive)](https://drive.google.com/file/d/1swvx4bzEEMCsOaR5D55bHlS_W94fgZj-/view?usp=drive_link)
 
 ---
@@ -41,6 +45,8 @@ The PINN architecture from Test 7 is **adapted for binary lensed-object detectio
 |--------|------------|
 | Accuracy | 96.32% |
 | AUC | 0.9862 |
+
+![Task 5 ROC Curve](test5/Results/roc_curve_t5.png)
 
 → [Full details](test5/README.md) · [Pretrained weights (Google Drive)](https://drive.google.com/file/d/1HguccXxK7vKp9JQVPAWcq-JYhiuhkziK/view?usp=drive_link)
 

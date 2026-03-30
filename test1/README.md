@@ -117,6 +117,22 @@ The model was evaluated at epoch 0 (before any training) and after each of the 1
 | Train AUC (macro OvR) | 0.4974 | 0.9856 | — |
 | Val AUC (macro OvR) | 0.5052 | 0.9766 | **0.9774** |
 
+### Image Classes
+
+![Image Classes](DeepLense_Gravitational_Lensing_Results/image_classes_t1.png)
+
+### Training Curves
+
+![Training Curves](DeepLense_Gravitational_Lensing_Results/training_curves_t1.png)
+
+### ROC Curves
+
+![ROC Curves](DeepLense_Gravitational_Lensing_Results/roc_curves_t1.png)
+
+### Confusion Matrix
+
+![Confusion Matrix](DeepLense_Gravitational_Lensing_Results/cm_t1.png)
+
 ### Key Observations
 
 - **Convergence**: Loss and accuracy improved steadily across 120 epochs, with the learning rate scheduler reducing the rate at plateaus to allow fine-grained convergence.

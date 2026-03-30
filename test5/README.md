@@ -97,6 +97,22 @@ The `LensingNpyDataset` in Test 7 assumes single-channel images and performs `sq
 
 The model converged quickly, reaching >90% validation accuracy by epoch 2 and stabilising above 95% by epoch 5. The small gap between train and validation AUC (0.9935 vs. 0.9862) indicates the physics layer and dropout regularisation effectively prevent overfitting despite the class imbalance.
 
+### Image Classes
+
+![Image Classes](Results/image_classes_t5.png)
+
+### Training Curves
+
+![Training Curves](Results/training_curves_t5.png)
+
+### ROC Curve
+
+![ROC Curve](Results/roc_curve_t5.png)
+
+### Confusion Matrix
+
+![Confusion Matrix](Results/cm_t5.png)
+
 ### Key Observations
 
 - **Rapid convergence** — The combination of ImageNet pretraining and the physics-informed lensing layer allowed the model to converge in just 24 epochs (compared to 138 in Test 7), as the backbone already possesses strong low-level feature extractors and the lensing layer provides a physically meaningful image transformation.
